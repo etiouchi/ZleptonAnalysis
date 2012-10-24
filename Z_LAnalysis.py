@@ -61,9 +61,10 @@ class TZLTree:
 		
 		self.l_tight_ele = utils.newArray('i', 50)
 		self.tree_ele.SetBranchAddress('l_tight', self.l_tight_ele)
-
 		self.l_triggerMatch_ele = utils.newArray('i', 50)
 		self.tree_ele.SetBranchAddress('l_triggerMatch', self.l_triggerMatch_ele)
+		self.l_lepton_ele = utils.newArray('i', 50)
+		self.tree_ele.SetBranchAddress('l_lepton', self.l_lepton_ele)
 
 		self.l_charge_ele = utils.newArray('f', 50)
 		self.tree_ele.SetBranchAddress('l_charge', self.l_charge_ele)
@@ -105,8 +106,6 @@ class TZLTree:
 		self.tree_ele.SetBranchAddress('l_typebkg', self.l_typebkg_ele)
 		self.l_originbkg_ele = utils.newArray('f', 50)
 		self.tree_ele.SetBranchAddress('l_originbkg', self.l_originbkg_ele)
-		self.l_truth_type_ele = utils.newArray('f', 50)
-		self.tree_ele.SetBranchAddress('l_truth_type', self.l_truth_type_ele)
 		self.l_truth_type_ele = utils.newArray('f', 50)
 		self.tree_ele.SetBranchAddress('l_truth_type', self.l_truth_type_ele)
 
@@ -153,9 +152,10 @@ class TZLTree:
 		
 		self.l_tight_mu = utils.newArray('i', 50)
 		self.tree_mu.SetBranchAddress('l_tight', self.l_tight_mu)
-
 		self.l_triggerMatch_mu = utils.newArray('i', 50)
 		self.tree_mu.SetBranchAddress('l_triggerMatch', self.l_triggerMatch_mu)
+		self.l_lepton_mu = utils.newArray('i', 50)
+		self.tree_mu.SetBranchAddress('l_lepton', self.l_lepton_mu)
 
 		self.l_charge_mu = utils.newArray('f', 50)
 		self.tree_mu.SetBranchAddress('l_charge', self.l_charge_mu)
@@ -199,14 +199,12 @@ class TZLTree:
 		#self.tree_mu.SetBranchAddress('l_originbkg', self.l_originbkg_mu)
 		#self.l_truth_type_mu = utils.newArray('f', 50)
 		#self.tree_mu.SetBranchAddress('l_truth_type', self.l_truth_type_mu)
-		#self.l_truth_type_mu = utils.newArray('f', 50)
-		#self.tree_mu.SetBranchAddress('l_truth_type', self.l_truth_type_mu)
 
 		self.l_tag_mu = utils.newArray('i', 50)		
 
 	#####################################################################
 
-	def Loop(self, mc_RunNumber, mc_weight, grl):
+	def Loop(self, Year, mc_RunNumber, mc_weight, grl):
 
 		eventNr1 = self.tree_ele.GetEntries()
 		eventNr2 = self.tree_mu.GetEntries()
@@ -392,6 +390,11 @@ class TZLTree:
 		NeUntagZuu_TrkIsoOk_Weighted = 0
 		NeUntagZuu_d0Ok_Weighted = 0
 		NeUntagZuu_AllOk_Weighted = 0
+		############################################
+
+		heTag_type = ROOT.TH1D('eTag_type', 'eTag_type', 23, 0, 23)
+		heUntag_typeZee = ROOT.TH1D('eUntag_typeZee', 'eUntag_typeZee', 23, 0, 23)
+		heUntag_typeZuu = ROOT.TH1D('eUntag_typeZuu', 'eUntag_typeZuu', 23, 0, 23)
 
 		############################################
 
@@ -578,7 +581,23 @@ class TZLTree:
 			I_Zee = [] #list of all the index implicated in the Z reconstructed
 
 			for i in xrange(0 + 0, self.n_ele[0]):
+
+				if Year == 2012 and self.l_clIso20_ele[i] > 0.20\
+				or			\
+				self.l_tkIso20_ele[i] > 0.15\
+				or			\
+				self.l_d0sigma_ele[i] > 6.5:
+					continue 
+
 				for j in xrange(i + 1, self.n_ele[0]):
+
+					if Year == 2012 and self.l_clIso20_ele[j] > 0.20\
+					or			\
+					self.l_tkIso20_ele[j] > 0.15\
+					or			\
+					self.l_d0sigma_ele[j] > 6.5:
+						continue 
+
 					if (self.l_charge_ele[i] * self.l_charge_ele[j]) < 0 \
 					    and \
 					    (self.l_pt_ele[i] > 20000 and self.l_pt_ele[j] > 20000) \
@@ -620,8 +639,10 @@ class TZLTree:
 
 					ZeeEvtList.append(weight)
 					hMass_ee.Fill(L_Zee[ZeebestIndex][2],evt_weight * weight)
+
+					
 					# IS DATA
-					if mc_RunNumber < 0:
+					if mc_RunNumber < 0 and Year == 2011:
 						if self.RunNumber_ele[0] >= 177986 and self.RunNumber_ele[0] <= 178109:
 							hZee_rate.Fill(0,evt_weight * weight)
 						if self.RunNumber_ele[0] >= 179710 and self.RunNumber_ele[0] <= 180481:
@@ -645,26 +666,28 @@ class TZLTree:
 						if self.RunNumber_ele[0] >= 190503 and self.RunNumber_ele[0] <= 191933:
 							hZee_rate.Fill(10,evt_weight * weight)
 
+					# IS DATA
+					if mc_RunNumber < 0 and Year == 2012:
+						if self.RunNumber_ele[0] >= 200804 and self.RunNumber_ele[0] <= 201556:
+							hZee_rate.Fill(0,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 202660 and self.RunNumber_ele[0] <= 205113:
+							hZee_rate.Fill(1,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 206248 and self.RunNumber_ele[0] <= 207397:
+							hZee_rate.Fill(2,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 207447 and self.RunNumber_ele[0] <= 209025:
+							hZee_rate.Fill(3,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 209074 and self.RunNumber_ele[0] <= 210308:
+							hZee_rate.Fill(4,evt_weight * weight)
+
 					# IS MC
-					if mc_RunNumber > 0:
-						if self.RunNumber_ele[0] == 180164:
-							hZee_rate.Fill(0, evt_weight * weight )
-							hZee_rate.Fill(1, evt_weight * weight )
+					if mc_RunNumber > 0 and Year == 2012:
+							hZee_rate.Fill(0, evt_weight * weight / 5.0)
+							hZee_rate.Fill(1, evt_weight * weight / 5.0)
+							hZee_rate.Fill(2, evt_weight * weight / 5.0)
+							hZee_rate.Fill(3, evt_weight * weight / 5.0)
+							hZee_rate.Fill(4, evt_weight * weight / 5.0)
 
-						elif self.RunNumber_ele[0] == 183003:
-							hZee_rate.Fill(2, evt_weight * weight)
-							hZee_rate.Fill(3, evt_weight * weight)
-							hZee_rate.Fill(4, evt_weight * weight)
-							hZee_rate.Fill(5, evt_weight * weight)
 
-						elif self.RunNumber_ele[0] == 186169:
-							hZee_rate.Fill(6, evt_weight * weight)
-							hZee_rate.Fill(7, evt_weight * weight)
-							hZee_rate.Fill(8, evt_weight * weight)
-
-						elif self.RunNumber_ele[0] == 189751:
-							hZee_rate.Fill(9, evt_weight * weight)
-							hZee_rate.Fill(10, evt_weight * weight)
 
 			#####################################################
 			#	Count number of Z recontructed 		    #
@@ -677,7 +700,27 @@ class TZLTree:
 			I_Zuu = []
 
 			for i in xrange(0 + 0, self.n_mu[0]):
+
+				if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] > 0.30)\
+				and \
+				(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] > 0.15))\
+				or			\
+				self.l_tkIso20_mu[i] > 0.15\
+				or			\
+				self.l_d0sigma_mu[i] > 3.5:
+					continue
+
 				for j in xrange(i + 1, self.n_mu[0]):
+
+					if ((self.l_lepton_mu[j] != 2 and self.l_clIso20_mu[j] > 0.30)\
+					and \
+					(self.l_lepton_mu[j] == 2 and self.l_clIso20_mu[j] > 0.15))\
+					or			\
+					self.l_tkIso20_mu[j] > 0.15\
+					or			\
+					self.l_d0sigma_mu[j] > 3.5:
+						continue
+
 					if (self.l_charge_mu[i] * self.l_charge_mu[j]) < 0 \
 					    and \
 					   (self.l_pt_mu[i] > 20000 and self.l_pt_mu[j] > 20000) \
@@ -697,7 +740,8 @@ class TZLTree:
 							if not j in I_Zuu:
 								I_Zuu.append(j)
 
-			for l_index in xrange(len(I_Zuu)):				ZuubestMassR = 999999.0
+			for l_index in xrange(len(I_Zuu)):
+				ZuubestMassR = 999999.0
 				ZuubestIndex = 999999
 				for z_index in xrange(len(L_Zuu)):
 					if self.l_tag_mu[L_Zuu[z_index][0]] == 0\
@@ -718,8 +762,9 @@ class TZLTree:
 
 					ZuuEvtList.append(weight)
 					hMass_uu.Fill(L_Zuu[ZuubestIndex][2],evt_weight * weight)
+					
 					# IS DATA
-					if mc_RunNumber < 0:
+					if mc_RunNumber < 0 and Year == 2011:
 						if self.RunNumber_ele[0] >= 177986 and self.RunNumber_ele[0] <= 178109:
 							hZuu_rate.Fill(0,evt_weight * weight)
 						if self.RunNumber_ele[0] >= 179710 and self.RunNumber_ele[0] <= 180481:
@@ -743,26 +788,26 @@ class TZLTree:
 						if self.RunNumber_ele[0] >= 190503 and self.RunNumber_ele[0] <= 191933:
 							hZuu_rate.Fill(10,evt_weight * weight)
 
+					# IS DATA
+					if mc_RunNumber < 0 and Year == 2012:
+						if self.RunNumber_ele[0] >= 200804 and self.RunNumber_ele[0] <= 201556:
+							hZuu_rate.Fill(0,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 202660 and self.RunNumber_ele[0] <= 205113:
+							hZuu_rate.Fill(1,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 206248 and self.RunNumber_ele[0] <= 207397:
+							hZuu_rate.Fill(2,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 207447 and self.RunNumber_ele[0] <= 209025:
+							hZuu_rate.Fill(3,evt_weight * weight)
+						if self.RunNumber_ele[0] >= 209074 and self.RunNumber_ele[0] <= 210308:
+							hZuu_rate.Fill(4,evt_weight * weight)
+
 					# IS MC
-					if mc_RunNumber > 0:
-						if self.RunNumber_ele[0] == 180164:
-							hZuu_rate.Fill(0, evt_weight * weight)
-							hZuu_rate.Fill(1, evt_weight * weight)
-
-						elif self.RunNumber_ele[0] == 183003:
-							hZuu_rate.Fill(2, evt_weight * weight)
-							hZuu_rate.Fill(3, evt_weight * weight)
-							hZuu_rate.Fill(4, evt_weight * weight)
-							hZuu_rate.Fill(5, evt_weight * weight)
-
-						elif self.RunNumber_ele[0] == 186169:
-							hZuu_rate.Fill(6, evt_weight * weight)
-							hZuu_rate.Fill(7, evt_weight * weight)
-							hZuu_rate.Fill(8, evt_weight * weight)
-
-						elif self.RunNumber_ele[0] == 189751:
-							hZuu_rate.Fill(9, evt_weight * weight)
-							hZuu_rate.Fill(10, evt_weight * weight)
+					if mc_RunNumber > 0 and Year == 2012:
+							hZuu_rate.Fill(0, evt_weight * weight / 5.0)
+							hZuu_rate.Fill(1, evt_weight * weight / 5.0)
+							hZuu_rate.Fill(2, evt_weight * weight / 5.0)
+							hZuu_rate.Fill(3, evt_weight * weight / 5.0)
+							hZuu_rate.Fill(4, evt_weight * weight / 5.0)
 
 
 			#####################################################
@@ -872,11 +917,13 @@ class TZLTree:
 						heTagZee_TrkIso.Fill(self.l_tkIso20_ele[i], weight)
 						heTagZee_d0Sig.Fill(self.l_d0sigma_ele[i], weight)
 
+						heTag_type.Fill(self.l_type_ele[i], weight)
+
 						#####################
 						# IsoCuts on Z ele  #
 						#####################
 
-						if self.l_clIso20_ele[i] < 0.30:
+						if Year == 2012 and self.l_clIso20_ele[i] < 0.20:
 							NeTagZee_CaloIsoOk += 1
 							NeTagZee_CaloIsoOk_Weighted += weight
 						if self.l_tkIso20_ele[i] < 0.15:
@@ -885,7 +932,7 @@ class TZLTree:
 						if self.l_d0sigma_ele[i] < 6.5:
 							NeTagZee_d0Ok += 1
 							NeTagZee_d0Ok_Weighted += weight
-						if self.l_clIso20_ele[i] < 0.30\
+						if Year == 2012 and self.l_clIso20_ele[i] < 0.20\
 						and			\
 						self.l_tkIso20_ele[i] < 0.15\
 						and			\
@@ -936,11 +983,13 @@ class TZLTree:
 							heUntagZee_TrkIso.Fill(self.l_tkIso20_ele[i], weight)
 							heUntagZee_d0Sig.Fill(self.l_d0sigma_ele[i], weight)
 
+							heUntag_typeZee.Fill(self.l_type_ele[i], weight)
+
 							#####################
 							# IsoCuts add ele   #
 							#####################
 
-							if self.l_clIso20_ele[i] < 0.30:
+							if Year == 2012 and self.l_clIso20_ele[i] < 0.20:
 								NeUntagZee_CaloIsoOk += 1
 								NeUntagZee_CaloIsoOk_Weighted += weight
 								heUntagZeeCaloIsoOk_eta.Fill(self.l_eta_ele[i], weight)
@@ -956,7 +1005,7 @@ class TZLTree:
 								NeUntagZee_d0Ok_Weighted += weight
 								heUntagZeed0Ok_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZeed0Ok_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
-							if self.l_clIso20_ele[i] < 0.30\
+							if Year == 2012 and self.l_clIso20_ele[i] < 0.20\
 							and			\
 							self.l_tkIso20_ele[i] < 0.15\
 							and			\
@@ -999,7 +1048,9 @@ class TZLTree:
 							# IsoCuts on mu add#
 							#####################
 
-							if self.l_clIso20_mu[i] < 0.30:
+							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
+							or \
+							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15)):
 								NuUntagZee_CaloIsoOk += 1
 								NuUntagZee_CaloIsoOk_Weighted += weight
 								huUntagZeeCaloIsoOk_eta.Fill(self.l_eta_mu[i], weight)
@@ -1014,7 +1065,10 @@ class TZLTree:
 								NuUntagZee_d0Ok_Weighted += weight
 								huUntagZeed0Ok_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZeed0Ok_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
-							if self.l_clIso20_mu[i] < 0.30\
+
+							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
+							or \
+							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15))\
 							and			\
 							self.l_tkIso20_mu[i] < 0.15\
 							and			\
@@ -1104,7 +1158,9 @@ class TZLTree:
 						# IsoCuts on Z mu   #
 						#####################
 
-						if self.l_clIso20_mu[i] < 0.30:
+						if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
+						or\
+						(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15)):
 							NuTagZuu_CaloIsoOk += 1
 							NuTagZuu_CaloIsoOk_Weighted += weight
 						if self.l_tkIso20_mu[i] < 0.15:
@@ -1113,7 +1169,10 @@ class TZLTree:
 						if self.l_d0sigma_mu[i] < 3.5:
 							NuTagZuu_d0Ok += 1
 							NuTagZuu_d0Ok_Weighted += weight
-						if self.l_clIso20_mu[i] < 0.30\
+
+						if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
+						or\
+						(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15))\
 						and			\
 						self.l_tkIso20_mu[i] < 0.15\
 						and			\
@@ -1134,7 +1193,7 @@ class TZLTree:
 								if self.l_tag_mu[j] == 1:
 									Nb_tag_mu += 1
 									if(utils.dR(self.l_eta_ele[i], self.l_eta_mu[j], self.l_phi_ele[i], self.l_phi_mu[j]) > 0.2):
-										Nb_tag_ele_passDeltaR += 1
+										Nb_tag_mu_passDeltaR += 1
 							if(Nb_tag_mu != Nb_tag_mu_passDeltaR): continue
 
 							weight = evt_weight * ZuuEvtList[0] * self.weight3_ele[i]
@@ -1160,11 +1219,13 @@ class TZLTree:
 							heUntagZuu_TrkIso.Fill(self.l_tkIso20_ele[i], weight)
 							heUntagZuu_d0Sig.Fill(self.l_d0sigma_ele[i], weight)
 
+							heUntag_typeZuu.Fill(self.l_type_ele[i], weight)
+
 							#####################
 							# IsoCuts Add ele   #
 							#####################
 
-							if self.l_clIso20_ele[i] < 0.30:
+							if self.l_clIso20_ele[i] < 0.20:
 								NeUntagZuu_CaloIsoOk += 1
 								NeUntagZuu_CaloIsoOk_Weighted += weight
 								heUntagZuuCaloIsoOk_eta.Fill(self.l_eta_ele[i], weight)
@@ -1179,7 +1240,7 @@ class TZLTree:
 								NeUntagZuu_d0Ok_Weighted += weight
 								heUntagZuud0Ok_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZuud0Ok_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
-							if self.l_clIso20_ele[i] < 0.30\
+							if self.l_clIso20_ele[i] < 0.20\
 							and			\
 							self.l_tkIso20_ele[i] < 0.15\
 							and			\
@@ -1202,7 +1263,7 @@ class TZLTree:
 								if self.l_tag_mu[j] == 1:
 									Nb_tag_mu += 1
 									if(utils.dR(self.l_eta_mu[i], self.l_eta_mu[j], self.l_phi_mu[i], self.l_phi_mu[j]) > 0.1):
-										Nb_tag_ele_passDeltaR += 1
+										Nb_tag_mu_passDeltaR += 1
 							if(Nb_tag_mu != Nb_tag_mu_passDeltaR): continue
 							weight = evt_weight * ZuuEvtList[0] * self.weight3_mu[i] 
 
@@ -1222,7 +1283,9 @@ class TZLTree:
 							# IsoCuts Add mu    #
 							#####################
 
-							if self.l_clIso20_mu[i] < 0.30:
+							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
+							or\
+							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15)):
 								NuUntagZuu_CaloIsoOk += 1
 								NuUntagZuu_CaloIsoOk_Weighted += weight
 								huUntagZuuCaloIsoOk_eta.Fill(self.l_eta_mu[i], weight)
@@ -1237,7 +1300,10 @@ class TZLTree:
 								NuUntagZuu_d0Ok_Weighted += weight
 								huUntagZuud0Ok_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZuud0Ok_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
-							if self.l_clIso20_mu[i] < 0.30\
+
+							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
+							or\
+							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15))\
 							and			\
 							self.l_tkIso20_mu[i] < 0.15\
 							and			\
@@ -1324,10 +1390,14 @@ class TZLTree:
 
 		#############################################################
 
-		f = ROOT.TFile('output/Zuu_DATA.root', 'RECREATE')
-		#f = ROOT.TFile('output/Zuu_MC_%d.root' % mc_RunNumber, 'RECREATE')
-		#f = ROOT.TFile('output/Zee_DATA.root', 'RECREATE')
-		#f = ROOT.TFile('output/Zee_MC_%d.root' % mc_RunNumber, 'RECREATE')
+		#f = ROOT.TFile('output/%d/Zee_DATA.root' %Year, 'RECREATE')
+		f = ROOT.TFile('output/%d/Zuu_DATA.root' %Year, 'RECREATE')
+
+		#f = ROOT.TFile('output/%d/Zee_MC_%d.root' %(Year, mc_RunNumber), 'RECREATE')
+		#f = ROOT.TFile('output/%d/Zuu_MC_%d.root' %(Year, mc_RunNumber), 'RECREATE')
+
+
+		#f = ROOT.TFile('output/%d/Z_MC_%d.root' %(Year, mc_RunNumber), 'RECREATE')
 
 		f.cd()
 
@@ -1523,30 +1593,34 @@ class TZLTree:
 # LOAD									    #
 #############################################################################
 
-lumi = 4.807 #Zuu
-#lumi = 4.910 #Zee
-
 import BkgCrossSection
 
-def load(fileName, RunNumber, nbrOfEvent, grl):
-	chain1 = utils.localLoader(fileName, 'elSTACO')
-	chain2 = utils.localLoader(fileName, 'muSTACO')
+def load(fileName, Year, RunNumber, nbrOfEvent, grl):
+
+	chain1 = utils.localLoader(fileName, 'el')
+	chain2 = utils.localLoader(fileName, 'mu')
 
 	if RunNumber > 0 and nbrOfEvent > 0:
-		weight = BkgCrossSection.GetBkgCrossSection7TeV(RunNumber) * lumi / nbrOfEvent
+		if Year == 2011:
+			#lumi = 4.807 #Zuu
+			lumi = 4.910 #Zee
+			weight = BkgCrossSection.GetBkgCrossSection7TeV(RunNumber) * lumi / nbrOfEvent
+		if Year == 2012:
+			lumi = 13.0 #AllGood
+			weight = BkgCrossSection.GetBkgCrossSection8TeV(RunNumber) * lumi / nbrOfEvent
 	else:
 		weight = 1.0000000000000000000000000000000000000000000000000000000000000000000
 
-	BkgCrossSection.GetBkgCrossSection7TeV(RunNumber)
+	#BkgCrossSection.GetBkgCrossSection7TeV(RunNumber)
 
 	algo = TZLTree(chain1, chain2)
-	algo.Loop(RunNumber, weight, grl)
+	algo.Loop(Year, RunNumber, weight, grl)
 
 #############################################################################
 # INIT									    #
 #############################################################################
 
-def reco(fileNameList, RunNumberList, nbrOfEventList, grl):
+def reco(fileNameList, Year, RunNumberList, nbrOfEventList, grl):
 	l1 = len(fileNameList)
 	l2 = len(RunNumberList)
 	l3 = len(nbrOfEventList)
@@ -1556,7 +1630,7 @@ def reco(fileNameList, RunNumberList, nbrOfEventList, grl):
 		return False
 
 	for i in xrange((l1 + l2 + l3) / 3):
-		load(fileNameList[i], RunNumberList[i], nbrOfEventList[i], grl)
+		load(fileNameList[i], Year, RunNumberList[i], nbrOfEventList[i], grl)
 
 	return True
 
@@ -1564,12 +1638,23 @@ def reco(fileNameList, RunNumberList, nbrOfEventList, grl):
 
 import GRLEgamma
 import GRLMuons
-
+import GRL2012_ALLGOOD
 atlas.init()
-#reco(['input/2011/egamma.txt'], [-1], [-1], GRLEgamma)
-reco(['input/2011/muons.txt'], [-1], [-1], GRLMuons)
 
-#reco(['input/2011/mc11.107650.AlpgenJimmyZeeNp0_pt20.txt'], [107650], [6618284], GRLEgamma)
+#############################################################################
+#				2011
+#############################################################################
+#DATA
+
+#reco(['input/2011/egamma_AllYear.txt'], 2011, [-1], [-1], GRLEgamma)
+#reco(['input/2011/muon_AllYear.txt'], 2011, [-1], [-1], GRLMuons)
+
+#MC
+#reco(['input/2011/mc11.107650.AlpgenJimmyZeeNp0_pt20.txt'], 2011, [107650], [6618284], GRLEgamma)
+#reco(['input/2011/mc11.107660.AlpgenJimmyZmumuNp0_pt20.txt'], 2011, [107660], [6615230], GRLEgamma)
+
+
+
 #reco(['input/2011/mc11.107651.AlpgenJimmyZeeNp1_pt20.txt'], [107651], [1334897], GRLEgamma)
 #reco(['input/2011/mc11.107652.AlpgenJimmyZeeNp2_pt20.txt'], [107652], [2004195], GRLEgamma)
 #reco(['input/2011/mc11.107653.AlpgenJimmyZeeNp3_pt20.txt'], [107653], [549949], GRLEgamma)
@@ -1584,7 +1669,7 @@ reco(['input/2011/muons.txt'], [-1], [-1], GRLMuons)
 #reco(['input/2011/mc11.116962.AlpgenHWfZeebbNp2_4LepM.txt'], [116962], [11500], GRLEgamma)
 #reco(['input/2011/mc11.116963.AlpgenHWfZeebbNp3_4LepM.txt'], [116963], [1500], GRLEgamma)
  
-#reco(['input/2011/mc11.107660.AlpgenJimmyZmumuNp0_pt20.txt'], [107660], [6615230], GRLEgamma)
+
 #reco(['input/2011/mc11.107661.AlpgenJimmyZmumuNp1_pt20.txt'], [107661], [1334296], GRLEgamma)
 #reco(['input/2011/mc11.107662.AlpgenJimmyZmumuNp2_pt20.txt'], [107662], [1999941], GRLEgamma)
 #reco(['input/2011/mc11.107663.AlpgenJimmyZmumuNp3_pt20.txt'], [107663], [549896], GRLEgamma)
@@ -1594,7 +1679,8 @@ reco(['input/2011/muons.txt'], [-1], [-1], GRLMuons)
 #reco(['input/2011/mc11.116956.AlpgenHWfZmumubbNp1_Veto4LepM_Pass3Lep.txt'], [116956], [149950], GRLEgamma)
 #reco(['input/2011/mc11.116957.AlpgenHWfZmumubbNp2_Veto4LepM_Pass3Lep.txt'], [116957], [79999], GRLEgamma)
 #reco(['input/2011/mc11.116958.AlpgenHWfZmumubbNp3_Veto4LepM_Pass3Lep.txt'], [116958], [20000], GRLEgamma)
-#reco(['input/2011/mc11.116965.AlpgenHWfZmumubbNp0_4LepM.txt'], [116965], [149500], GRLEgamma)#reco(['input/2011/mc11.116966.AlpgenHWfZmumubbNp1_4LepM.txt'], [116966], [90000], GRLEgamma)
+#reco(['input/2011/mc11.116965.AlpgenHWfZmumubbNp0_4LepM.txt'], [116965], [149500], GRLEgamma)
+#reco(['input/2011/mc11.116966.AlpgenHWfZmumubbNp1_4LepM.txt'], [116966], [90000], GRLEgamma)
 #reco(['input/2011/mc11.116967.AlpgenHWfZmumubbNp2_4LepM.txt'], [116967], [11500], GRLEgamma)
 #reco(['input/2011/mc11.116968.AlpgenHWfZmumubbNp3_4LepM.txt'], [116968], [1500], GRLEgamma)
 
@@ -1610,4 +1696,84 @@ reco(['input/2011/muons.txt'], [-1], [-1], GRLMuons)
 #reco(['input/2011/mc11.126862.PowHegZZ_2mu2tau_trilep5GeV_Pythia.txt'], [126862], [199899], GRLEgamma)
 #reco(['input/2011/mc11.126863.PowHegZZ_2e2tau_trilep5GeV_Pythia.txt'], [126863], [199999], GRLEgamma)
 #reco(['input/2011/mc11.126864.PowHegZZ_4tau_trilep5GeV_Pythia.txt'], [126864], [99999], GRLEgamma)
+
+#############################################################################
+#				2012
+#############################################################################
+
+#------------------------- > DATA
+
+#reco(['input/2012/data12_periodA-E_Egamma.txt'], 2012, [-1], [-1], GRL2012_ALLGOOD)
+reco(['input/2012/data12_periodA-E_Muons.txt'], 2012, [-1], [-1], GRL2012_ALLGOOD)
+
+#------------------------- > MC
+#ttbar
+#reco(['input/2012/mc12.105200.McAtNloJimmy_CT10_ttbar_LeptonFilter.txt'], 2012, [105200], [14983835], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146369.McAtNloJimmy_CT10_ttbar_4LepMass_Mll40GeV12GeV.txt'], 2012, [146369], [399098], GRL2012_ALLGOOD)
+
+#Z+jet
+#reco(['input/2012/mc12.107650.AlpgenJimmy_AUET2CTEQ6L1_ZeeNp0.txt'], 2012, [107650], [6604283], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107651.AlpgenJimmy_AUET2CTEQ6L1_ZeeNp1.txt'], 2012, [107651], [1329994], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107652.AlpgenJimmy_AUET2CTEQ6L1_ZeeNp2.txt'], 2012, [107652], [404798], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107653.AlpgenJimmy_AUET2CTEQ6L1_ZeeNp3.txt'], 2012, [107653], [109998], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107654.AlpgenJimmy_AUET2CTEQ6L1_ZeeNp4.txt'], 2012, [107654], [30000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107655.AlpgenJimmy_AUET2CTEQ6L1_ZeeNp5.txt'], 2012, [107655], [10000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107660.AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp0.txt'], 2012, [107660], [6609982], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107661.AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp1.txt'], 2012, [107661], [1334897], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107662.AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp2.txt'], 2012, [107662], [404897], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107663.AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp3.txt'], 2012, [107663], [110000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107664.AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp4.txt'], 2012, [107664], [29999], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107665.AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp5.txt'], 2012, [107665], [10000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107670.AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp0.txt'], 2012, [107670], [6607086], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107671.AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp1.txt'], 2012, [107671], [1334896], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107672.AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp2.txt'], 2012, [107672], [404900], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107673.AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp3.txt'], 2012, [107673], [110000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107674.AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp4.txt'], 2012, [107674], [28999], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.107675.AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp5.txt'], 2012, [107675], [10000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146830.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZeeNp0Excl_Mll10to60.txt'], 2012, [146830], [999496], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146831.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZeeNp1Excl_Mll10to60.txt'], 2012, [146831], [299498], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146832.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZeeNp2Excl_Mll10to60.txt'], 2012, [146832], [396499], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146833.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZeeNp3Excl_Mll10to60.txt'], 2012, [146833], [145399], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146834.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZeeNp4Excl_Mll10to60.txt'], 2012, [146834], [37500], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146840.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZmumuNp0Excl_Mll10to60.txt'], 2012, [146840], [997896], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146841.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZmumuNp1Excl_Mll10to60.txt'], 2012, [146841], [300000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146842.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZmumuNp2Excl_Mll10to60.txt'], 2012, [146842], [396499], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146843.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZmumuNp3Excl_Mll10to60.txt'], 2012, [146843], [145499], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146844.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZmumuNp4Excl_Mll10to60.txt'], 2012, [146844], [37400], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146850.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZtautauNp0Excl_Mll10to60.txt'], 2012, [146850], [999896], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146851.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZtautauNp1Excl_Mll10to60.txt'], 2012, [146851], [298899], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146852.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZtautauNp2Excl_Mll10to60.txt'], 2012, [146852], [397500], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146853.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZtautauNp3Excl_Mll10to60.txt'], 2012, [146853], [145400], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146854.AlpgenJimmy_Auto_AUET2CTEQ6L1_ZtautauNp4Excl_Mll10to60.txt'], 2012, [146854], [365497], GRL2012_ALLGOOD)
+
+#Zbb+jet
+#reco(['input/2012/mc12.146980.AlpgenJimmy_Auto_AUET2CTEQ6L1_4lFilter_ZeeNp0.txt'], 2012, [146980], [217099], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146981.AlpgenJimmy_Auto_AUET2CTEQ6L1_4lFilter_ZeeNp1.txt'], 2012, [146981], [105199], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146982.AlpgenJimmy_Auto_AUET2CTEQ6L1_4lFilter_ZbbeeNp2.txt'], 2012, [146982], [23500], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146985.AlpgenJimmy_Auto_AUET2CTEQ6L1_4lFilter_ZmumuNp0.txt'], 2012, [146985], [213299], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146986.AlpgenJimmy_Auto_AUET2CTEQ6L1_4lFilter_ZmumuNp1.txt'], 2012, [146986], [105600], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146987.AlpgenJimmy_Auto_AUET2CTEQ6L1_4lFilter_ZbbmumuNp2.txt'], 2012, [146987], [23300], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146990.AlpgenJimmy_Auto_AUET2CTEQ6L1_3lFilter_4lVeto_ZeeNp0.txt'], 2012, [146990], [275700], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146991.AlpgenJimmy_Auto_AUET2CTEQ6L1_3lFilter_4lVeto_ZeeNp1.txt'], 2012, [146991], [164000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146992.AlpgenJimmy_Auto_AUET2CTEQ6L1_3lFilter_4lVeto_ZbbeeNp2.txt'], 2012, [146992], [78498], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146995.AlpgenJimmy_Auto_AUET2CTEQ6L1_3lFilter_4lVeto_ZmumuNp0.txt'], 2012, [146995], [275700], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146996.AlpgenJimmy_Auto_AUET2CTEQ6L1_3lFilter_4lVeto_ZmumuNp1.txt'], 2012, [146996], [163300], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.146997.AlpgenJimmy_Auto_AUET2CTEQ6L1_3lFilter_4lVeto_ZbbmumuNp2.txt'], 2012, [146997], [77200], GRL2012_ALLGOOD)
+
+#WZ
+#reco(['input/2012/mc12.161961.Sherpa_CT10_lllnu_WZ.txt'], 2012, [161961], [599600], GRL2012_ALLGOOD)
+
+#ZZ
+#reco(['input/2012/mc12.116601.gg2ZZJimmy_AUET2CT10_ZZ4e.txt'], 2012, [116601], [90000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.116602.gg2ZZJimmy_AUET2CT10_ZZ4mu.txt'], 2012, [116602], [89699], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.116603.gg2ZZJimmy_AUET2CT10_ZZ2e2mu.txt'], 2012, [116603], [89899], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.126937.PowhegPythia8_AU2CT10_ZZ_4e_mll4_2pt5.txt'], 2012, [126937], [599998], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.126938.PowhegPythia8_AU2CT10_ZZ_2e2mu_mll4_2pt5.txt'], 2012, [126938], [599799], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.126939.PowhegPythia8_AU2CT10_ZZ_2e2tau_mll4_2pt5.txt'], 2012, [126939], [599899], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.126940.PowhegPythia8_AU2CT10_ZZ_4mu_mll4_2pt5.txt'], 2012, [126940], [600000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.126941.PowhegPythia8_AU2CT10_ZZ_2mu2tau_mll4_2pt5.txt'], 2012, [126941], [600000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.126942.PowhegPythia8_AU2CT10_ZZ_4tau_mll4_2pt5.txt'], 2012, [126942], [300000], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.167162.PowhegPythia8_AU2CT10_ZZ_4e_m4l100_150_mll4_4pt3.txt'], 2012, [167162], [249999], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.167163.PowhegPythia8_AU2CT10_ZZ_2e2mu_m4l100_150_mll4_4pt3.txt'], 2012, [167163], [499900], GRL2012_ALLGOOD)
+#reco(['input/2012/mc12.167165.PowhegPythia8_AU2CT10_ZZ_4mu_m4l100_150_mll4_4pt3.txt'], 2012, [167165], [250000], GRL2012_ALLGOOD)
 

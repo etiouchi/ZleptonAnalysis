@@ -306,13 +306,13 @@ def GetBkgCrossSection8TeV(RunNumber):
 	
 	if   RunNumber == 105200:
 		process = 'McAtNloJimmy_CT10_ttbar_LeptonFilter'
-		crossSection = 238.06e3 * 0.648
+		crossSection = 238.06e3*0.648
 	elif RunNumber == 110001:
 		process = 'McAtNloJimmy_CT10_ttbar_dilepton'
-		crossSection = 238.06e3 * 0.1045
+		crossSection = 238.06e3*0.1045
 	elif RunNumber == 146369:
 		process = 'ttbar_4LepMass_Mll50GeV12GeV'
-		crossSection = 238.06e3 * 0.1045 * 0.0306
+		crossSection = 238.06e3*0.1045*0.0306
 	elif RunNumber == 126937:
 		process = 'PowhegPythia8_AU2CT10_ZZ_4e_mll4_2pt5'
 		crossSection = 69.75
@@ -333,77 +333,184 @@ def GetBkgCrossSection8TeV(RunNumber):
 		crossSection = 8.15
 	elif RunNumber == 116601:
 		process = 'gg2ZZJimmy_AUET2CT10_ZZ4e'
-		crossSection = 1.14 / 2.0
+		crossSection = 1.345/2.
 	elif RunNumber == 116602:
 		process = 'gg2ZZJimmy_AUET2CT10_ZZ4mu'
-		crossSection = 1.14 / 2.0
+		crossSection = 1.345/2.
 	elif RunNumber == 116603:
 		process = 'gg2ZZJimmy_AUET2CT10_ZZ2e2mu'
-		crossSection = 1.14
+		crossSection = 1.345
 	elif RunNumber == 107650:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZeeNp0'
-		crossSection = 712000. * 1.23
+		crossSection = 712000.*1.23
 	elif RunNumber == 107651:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZeeNp1'
-		crossSection = 155000. * 1.23
+		crossSection = 155000.*1.23
 	elif RunNumber == 107652:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZeeNp2'
-		crossSection = 48800. * 1.23
+		crossSection = 48800.*1.23
 	elif RunNumber == 107653:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZeeNp3'
-		crossSection = 14200. * 1.23
+		crossSection = 14200.*1.23
 	elif RunNumber == 107654:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZeeNp4'
-		crossSection = 3770. * 1.23
+		crossSection = 3770.*1.23
 	elif RunNumber == 107655:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZeeNp5'
-		crossSection = 1120. * 1.23
+		crossSection = 1120.*1.23
 	elif RunNumber == 107660:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp0'
-		crossSection = 712000. * 1.23
+		crossSection = 712000.*1.23
 	elif RunNumber == 107661:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp1'
-		crossSection = 155000. * 1.23
+		crossSection = 155000.*1.23
 	elif RunNumber == 107662:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp2'
-		crossSection = 48800. * 1.23
+		crossSection = 48800.*1.23
 	elif RunNumber == 107663:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp3'
-		crossSection = 14200. * 1.23
+		crossSection = 14200.*1.23
 	elif RunNumber == 107664:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp4'
-		crossSection = 3770. * 1.23
+		crossSection = 3770.*1.23
 	elif RunNumber == 107665:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZmumuNp5'
-		crossSection = 1120. * 1.23
+		crossSection = 1120.*1.23
 	elif RunNumber == 107670:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp0'
-		crossSection = 712000. * 1.23
+		crossSection = 712000.*1.23
 	elif RunNumber == 107671:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp1'
-		crossSection = 155000. * 1.23
+		crossSection = 155000.*1.23
 	elif RunNumber == 107672:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp2'
-		crossSection = 48800. * 1.23
+		crossSection = 48800.*1.23
 	elif RunNumber == 107673:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp3'
-		crossSection = 14200. * 1.23
+		crossSection = 14200.*1.23
 	elif RunNumber == 107674:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp4'
-		crossSection = 3770. * 1.23
+		crossSection = 3770.*1.23
 	elif RunNumber == 107675:
 		process = 'AlpgenJimmy_AUET2CTEQ6L1_ZtautauNp5'
-		crossSection = 1120. * 1.23
+		crossSection = 1120.*1.23
 	elif RunNumber == 147808:
 		process = 'PowhegPythia8_AU2CT10_Ztautau'
-		crossSection = 1.109e6 * 1.04
+		crossSection = 1.109e6*1.04
 	elif RunNumber == 147807:
 		process = 'PowhegPythia8_AU2CT10_Zmumu'
-		crossSection = 1.109e6 * 1.04
+		crossSection = 1.109e6*1.04
 	elif RunNumber == 147806:
 		process = 'PowhegPythia8_AU2CT10_Zee'
-		crossSection = 1.109e6 * 1.04
-
+		crossSection = 1.109e6*1.04
+	elif RunNumber == 146830:
+		process = ''
+		crossSection = 3.48e6*1.19
+	elif RunNumber == 146831:
+		process = ''
+		crossSection = 0.11e6*1.19
+	elif RunNumber == 146832:
+		process = ''
+		crossSection = 0.0523e6*1.19
+	elif RunNumber == 146833:
+		process = ''
+		crossSection = 0.0113e6*1.19
+	elif RunNumber == 146834:
+		process = ''
+		crossSection = 2.59e3*1.19
+	elif RunNumber == 146835:
+		process = ''
+		crossSection = 6.93e2*1.19
+	elif RunNumber == 146840:
+		process = ''
+		crossSection = 3.48e6*1.19
+	elif RunNumber == 146841:
+		process = ''
+		crossSection = 0.11e6*1.19
+	elif RunNumber == 146842:
+		process = ''
+		crossSection = 0.0523e6*1.19
+	elif RunNumber == 146843:
+		process = ''
+		crossSection = 0.0113e6*1.19
+	elif RunNumber == 146844:
+		process = ''
+		crossSection = 2.59e3*1.19
+	elif RunNumber == 146845:
+		process = ''
+		crossSection = 6.93e2*1.19
+	elif RunNumber == 146850:
+		process = ''
+		crossSection = 3.48e6*1.19
+	elif RunNumber == 146851:
+		process = ''
+		crossSection = 0.11e6*1.19
+	elif RunNumber == 146852:
+		process = ''
+		crossSection = 0.0523e6*1.19
+	elif RunNumber == 146853:
+		process = ''
+		crossSection = 0.0113e6*1.19
+	elif RunNumber == 146854:
+		process = ''
+		crossSection = 2.59e3*1.19
+	elif RunNumber == 146980:
+		process = 'Zbb, Z->ee + 0 partons (4 Leptons Mass)'
+		crossSection = 1.6*30.2473
+	elif RunNumber == 146981:
+		process = 'Zbb, Z->ee + 1 partons (4 Leptons Mass)'
+		crossSection = 1.6*25.9125
+	elif RunNumber == 146982:
+		process = 'Zbb, Z->ee + 2 partons (4 Leptons Mass)'
+		crossSection = 1.6*15.0649
+	elif RunNumber == 146985:
+		process = 'Zbb, Z->mumu + 0 partons (4 Leptons Mass)'
+		crossSection = 1.6*30.4634
+	elif RunNumber == 146986:
+		process = 'Zbb, Z->mumu + 1 partons (4 Leptons Mass)'
+		crossSection = 1.6*26.0188
+	elif RunNumber == 146987:
+		process = 'Zbb, Z->mumu + 2 partons (4 Leptons Mass)'
+		crossSection = 1.6*14.9299
+	elif RunNumber == 146990:
+		process = 'Zbb, Z->ee + 0 partons (4 Leptons Mass Veto + Pass 3 Leptons)'
+		crossSection = 1.6*749.9056
+	elif RunNumber == 146991:
+		process = 'Zbb, Z->ee + 1 partons (4 Leptons Mass Veto + Pass 3 Leptons)'
+		crossSection = 1.6*449.5598
+	elif RunNumber == 146992:
+		process = 'Zbb, Z->ee + 2 partons (4 Leptons Mass Veto + Pass 3 Leptons)'
+		crossSection = 1.6*192.7407
+	elif RunNumber == 146995:
+		process = 'Zbb, Z->mumu + 0 partons (4 Leptons Mass Veto + Pass 3 Leptons)'
+		crossSection = 1.6*752.9395
+	elif RunNumber == 146996:
+		process = 'Zbb, Z->mumu + 1 partons (4 Leptons Mass Veto + Pass 3 Leptons)'
+		crossSection = 1.6*449.7719
+	elif RunNumber == 146997:
+		process = 'Zbb, Z->mumu + 2 partons (4 Leptons Mass Veto + Pass 3 Leptons)'
+		crossSection = 1.6*192.7161
+	elif RunNumber == 161961:
+		process = 'Sherpa_CT10_lllnu_WZ'
+		crossSection = 2.5126e3
+	elif RunNumber == 167162:
+		process = 'Powheg ZZ->4e with 100-150 mass filter'
+		crossSection = 5.22
+	elif RunNumber == 167165:
+		process = 'Powheg ZZ->4mu with 100-150 mass filter'
+		crossSection = 5.45
+	elif RunNumber == 167163:
+		process = 'Powheg ZZ->2e2mu with 100-150 mass filter'
+		crossSection = 10.69
+	elif RunNumber == 167162:
+		process = 'Powheg ZZ->4e with 100-150 mass filter'
+		crossSection = 5.22
+	elif RunNumber == 167165:
+		process = 'Powheg ZZ->4mu with 100-150 mass filter'
+		crossSection = 5.45
+	elif RunNumber == 167163:
+		process = 'Powheg ZZ->2e2mu with 100-150 mass filter'
+		crossSection = 10.69
 	print('RunNumber: %d, Process: %s, Cross section x Branching Ratio: %f fb^-1' % (RunNumber, process, crossSection))
 
 	return crossSection
