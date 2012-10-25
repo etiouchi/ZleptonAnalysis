@@ -142,3 +142,36 @@ def dR(eta1, eta2, phi1, phi2):
 
 	return math.sqrt(dEta * dEta + dPhi * dPhi)
 
+#############################################################################
+
+def isLeptonPassCuts(Year, isPassCaloIso, isPassTrackIso, isPassd0sigma, l_Type, l_CaloIso, l_trackIso, l_d0Sigma):
+	passCuts = 0
+	if Year == 2012:
+	
+		if l_Type == 0: #electron
+			if l_CaloIso < 0.20: passCuts += 1
+			if l_trackIso < 0.20: passCuts += 0x10
+			if l_d0Sigma < 6.5: passCuts += 0x100
+
+		if l_Type == 1 or l_Type == 3: #muon Combined + segmented tag and calo
+			if l_CaloIso < 0.30: passCuts += 1
+			if l_trackIso < 0.15: passCuts += 0x10
+			if l_d0Sigma < 3.5: passCuts += 0x100
+
+		if l_Type == 2: #muon standalone
+			if l_CaloIso < 0.15: passCuts += 1
+			if l_trackIso < 0.15: passCuts += 0x10
+			if l_d0Sigma < 3.5: passCuts += 0x100
+
+		if isPassCaloIso == True and isPassTrackIso == False and isPassd0sigma == False:
+			return passCuts&1 == 1
+		if isPassCaloIso == False and isPassTrackIso == True and isPassd0sigma == False:
+			return passCuts&0x10 == 16
+		if isPassCaloIso == False and isPassTrackIso == False and isPassd0sigma == True:
+			return passCuts&0x100 == 256
+
+
+		if isPassCaloIso == True and isPassTrackIso == True and isPassd0sigma == True:
+			return passCuts&0x111 == 273
+
+#############################################################################

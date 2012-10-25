@@ -397,12 +397,6 @@ class TZLTree:
 		heUntag_typeZuu = ROOT.TH1D('eUntag_typeZuu', 'eUntag_typeZuu', 23, 0, 23)
 
 		############################################
-
-		ETABINS_XXbins = array.array('f', [-2.47, -2.37, -2.01, -1.81, -1.52, -1.37, -1.15, -0.8, -0.6, -0.1, 0,
-                    0.1, 0.6, 0.8, 1.15, 1.37, 1.52, 1.81, 2.01, 2.37, 2.47])
-
-
-		############################################
 		# Z rate per period			   #
 		############################################
 
@@ -422,11 +416,11 @@ class TZLTree:
 
 		hZeeEleUntag = ROOT.TH1F('hZeeEleUntag', 'ZeeEleUntag', 7, 0, 7)
 
-		heUntagZee_eta = ROOT.TH1F('heUntagZee_eta', 'heUntagZee_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZeeCaloIsoOk_eta = ROOT.TH1F('heUntagZeeCaloIsoOk_eta', 'heUntagZeeCaloIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZeeTrkIsoOk_eta = ROOT.TH1F('heUntagZeeTrkIsoOk_eta', 'heUntagZeeTrkIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZeed0Ok_eta = ROOT.TH1F('heUntagZeed0Ok_eta', 'heUntagZeed0Ok_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZeeAllOk_eta = ROOT.TH1F('heUntagZeeAllOk_eta', 'heUntagZeeAllOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
+		heUntagZee_eta = ROOT.TH1F('heUntagZee_eta', 'heUntagZee_eta', 540, -2.70, 2.70)
+		heUntagZeeCaloIsoOk_eta = ROOT.TH1F('heUntagZeeCaloIsoOk_eta', 'heUntagZeeCaloIsoOk_eta', 540, -2.70, 2.70)
+		heUntagZeeTrkIsoOk_eta = ROOT.TH1F('heUntagZeeTrkIsoOk_eta', 'heUntagZeeTrkIsoOk_eta', 540, -2.70, 2.70)
+		heUntagZeed0Ok_eta = ROOT.TH1F('heUntagZeed0Ok_eta', 'heUntagZeed0Ok_eta', 540, -2.70, 2.70)
+		heUntagZeeAllOk_eta = ROOT.TH1F('heUntagZeeAllOk_eta', 'heUntagZeeAllOk_eta', 540, -2.70, 2.70)
 
 		heUntagZee_pt = ROOT.TH1F('heUntagZee_pt', 'heUntagZee_pt', 1000, 0, 1000)
 		heUntagZeeCaloIsoOk_pt = ROOT.TH1F('heUntagZeeCaloIsoOk_pt', 'heUntagZeeCaloIsoOk_pt', 1000, 0, 1000)
@@ -448,11 +442,11 @@ class TZLTree:
 
 		hZeeMuUntag = ROOT.TH1F('hZeeMuUntag', 'ZeeMuUntag', 7, 0, 7)
 
-		huUntagZee_eta = ROOT.TH1F('huUntagZee_eta', 'huUntagZee_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZeeCaloIsoOk_eta = ROOT.TH1F('huUntagZeeCaloIsoOk_eta', 'huUntagZeeCaloIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZeeTrkIsoOk_eta = ROOT.TH1F('huUntagZeeTrkIsoOk_eta', 'huUntagZeeTrkIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZeed0Ok_eta = ROOT.TH1F('huUntagZeed0Ok_eta', 'huUntagZeed0Ok_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZeeAllOk_eta = ROOT.TH1F('huUntagZeeAllOk_eta', 'huUntagZeeAllOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
+		huUntagZee_eta = ROOT.TH1F('huUntagZee_eta', 'huUntagZee_eta', 540, -2.70, 2.70)
+		huUntagZeeCaloIsoOk_eta = ROOT.TH1F('huUntagZeeCaloIsoOk_eta', 'huUntagZeeCaloIsoOk_eta', 540, -2.70, 2.70)
+		huUntagZeeTrkIsoOk_eta = ROOT.TH1F('huUntagZeeTrkIsoOk_eta', 'huUntagZeeTrkIsoOk_eta', 540, -2.70, 2.70)
+		huUntagZeed0Ok_eta = ROOT.TH1F('huUntagZeed0Ok_eta', 'huUntagZeed0Ok_eta', 540, -2.70, 2.70)
+		huUntagZeeAllOk_eta = ROOT.TH1F('huUntagZeeAllOk_eta', 'huUntagZeeAllOk_eta', 540, -2.70, 2.70)
 
 		huUntagZee_pt = ROOT.TH1F('huUntagZee_pt', 'huUntagZee_pt', 1000, 0, 1000)
 		huUntagZeeCaloIsoOk_pt = ROOT.TH1F('huUntagZeeCaloIsoOk_pt', 'huUntagZeeCaloIsoOk_pt', 1000, 0, 1000)
@@ -474,7 +468,7 @@ class TZLTree:
 		heTagZee_phi = ROOT.TH1F('heTagZee_phi', 'heTagZee_phi', 20, -3.14, 3.14)
 		heFEBMissingTagZee_phi = ROOT.TH1F('heFEBMissingTagZee_phi', 'heFEBMissingTagZee_phi', 20, -3.14, 3.14)
 		heFEBRecoverTagZee_phi = ROOT.TH1F('heFEBRecoverTagZee_phi', 'heFEBRecoverTagZee_phi', 20, -3.14, 3.14)
-		heTagZee_eta = ROOT.TH1F('heTagZee_eta', 'heTagZee_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
+		heTagZee_eta = ROOT.TH1F('heTagZee_eta', 'heTagZee_eta', 540, -2.70, 2.70)
 		heTagZee_pt = ROOT.TH1F('heTagZee_pt', 'heTagZee_pt', 1000, 0, 1000)
 		heTagZee_d0 = ROOT.TH1F('heTagZee_d0', 'heTagZee_d0', 20, -20, 20)
 		heTagZee_z0 = ROOT.TH1F('heTagZee_z0', 'heTagZee_z0', 20, -20, 20)
@@ -488,11 +482,11 @@ class TZLTree:
 
 		hZuuEleUntag = ROOT.TH1F('hZuuEleUntag', 'ZuuEleUntag', 7, 0, 7)
 
-		heUntagZuu_eta = ROOT.TH1F('heUntagZuu_eta', 'heUntagZuu_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZuuCaloIsoOk_eta = ROOT.TH1F('heUntagZuuCaloIsoOk_eta', 'heUntagZuuCaloIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZuuTrkIsoOk_eta = ROOT.TH1F('heUntagZuuTrkIsoOk_eta', 'heUntagZuuTrkIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZuud0Ok_eta = ROOT.TH1F('heUntagZuud0Ok_eta', 'heUntagZuud0Ok_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		heUntagZuuAllOk_eta = ROOT.TH1F('heUntagZuuAllOk_eta', 'heUntagZuuAllOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
+		heUntagZuu_eta = ROOT.TH1F('heUntagZuu_eta', 'heUntagZuu_eta', 540, -2.70, 2.70)
+		heUntagZuuCaloIsoOk_eta = ROOT.TH1F('heUntagZuuCaloIsoOk_eta', 'heUntagZuuCaloIsoOk_eta', 540, -2.70, 2.70)
+		heUntagZuuTrkIsoOk_eta = ROOT.TH1F('heUntagZuuTrkIsoOk_eta', 'heUntagZuuTrkIsoOk_eta',540, -2.70, 2.70)
+		heUntagZuud0Ok_eta = ROOT.TH1F('heUntagZuud0Ok_eta', 'heUntagZuud0Ok_eta', 540, -2.70, 2.70)
+		heUntagZuuAllOk_eta = ROOT.TH1F('heUntagZuuAllOk_eta', 'heUntagZuuAllOk_eta', 540, -2.70, 2.70)
 
 		heUntagZuu_pt = ROOT.TH1F('heUntagZuu_pt', 'heUntagZuu_pt', 1000, 0, 1000)
 		heUntagZuuCaloIsoOk_pt = ROOT.TH1F('heUntagZuuCaloIsoOk_pt', 'heUntagZuuCaloIsoOk_pt', 1000, 0, 1000)
@@ -511,11 +505,11 @@ class TZLTree:
 
 		hZuuMuUntag = ROOT.TH1F('hZuuMuUntag', 'ZuuMuUntag', 7, 0, 7)
 
-		huUntagZuu_eta = ROOT.TH1F('huUntagZuu_eta', 'huUntagZuu_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZuuCaloIsoOk_eta = ROOT.TH1F('huUntagZuuCaloIsoOk_eta', 'huUntagZuuCaloIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZuuTrkIsoOk_eta = ROOT.TH1F('huUntagZuuTrkIsoOk_eta', 'huUntagZuuTrkIsoOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZuud0Ok_eta = ROOT.TH1F('huUntagZuud0Ok_eta', 'huUntagZuud0Ok_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
-		huUntagZuuAllOk_eta = ROOT.TH1F('huUntagZuuAllOk_eta', 'huUntagZuuAllOk_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
+		huUntagZuu_eta = ROOT.TH1F('huUntagZuu_eta', 'huUntagZuu_eta', 540, -2.70, 2.70)
+		huUntagZuuCaloIsoOk_eta = ROOT.TH1F('huUntagZuuCaloIsoOk_eta', 'huUntagZuuCaloIsoOk_eta', 540, -2.70, 2.70)
+		huUntagZuuTrkIsoOk_eta = ROOT.TH1F('huUntagZuuTrkIsoOk_eta', 'huUntagZuuTrkIsoOk_eta',540, -2.70, 2.70)
+		huUntagZuud0Ok_eta = ROOT.TH1F('huUntagZuud0Ok_eta', 'huUntagZuud0Ok_eta',540, -2.70, 2.70)
+		huUntagZuuAllOk_eta = ROOT.TH1F('huUntagZuuAllOk_eta', 'huUntagZuuAllOk_eta',540, -2.70, 2.70)
 
 		huUntagZuu_pt = ROOT.TH1F('huUntagZuu_pt', 'huUntagZuu_pt', 1000, 0, 1000)
 		huUntagZuuCaloIsoOk_pt = ROOT.TH1F('huUntagZuuCaloIsoOk_pt', 'huUntagZuuCaloIsoOk_pt', 1000, 0, 1000)
@@ -535,7 +529,7 @@ class TZLTree:
 		####################################
 
 		huTagZuu_phi = ROOT.TH1F('huTagZuu_phi', 'huTagZuu_phi', 20, -3.14, 3.14)
-		huTagZuu_eta = ROOT.TH1F('huTagZuu_eta', 'huTagZuu_eta', len(ETABINS_XXbins) - 1, ETABINS_XXbins)
+		huTagZuu_eta = ROOT.TH1F('huTagZuu_eta', 'huTagZuu_eta',540, -2.70, 2.70)
 		huTagZuu_pt = ROOT.TH1F('huTagZuu_pt', 'huTagZuu_pt', 1000, 0, 1000)
 
 		for event in xrange(eventNr1):
@@ -581,22 +575,12 @@ class TZLTree:
 			I_Zee = [] #list of all the index implicated in the Z reconstructed
 
 			for i in xrange(0 + 0, self.n_ele[0]):
-
-				if Year == 2012 and self.l_clIso20_ele[i] > 0.20\
-				or			\
-				self.l_tkIso20_ele[i] > 0.15\
-				or			\
-				self.l_d0sigma_ele[i] > 6.5:
-					continue 
+				if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == False:
+					continue
 
 				for j in xrange(i + 1, self.n_ele[0]):
-
-					if Year == 2012 and self.l_clIso20_ele[j] > 0.20\
-					or			\
-					self.l_tkIso20_ele[j] > 0.15\
-					or			\
-					self.l_d0sigma_ele[j] > 6.5:
-						continue 
+					if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_ele[j], self.l_clIso20_ele[j], self.l_tkIso20_ele[j], self.l_d0sigma_ele[j]) == False:
+						continue
 
 					if (self.l_charge_ele[i] * self.l_charge_ele[j]) < 0 \
 					    and \
@@ -700,25 +684,11 @@ class TZLTree:
 			I_Zuu = []
 
 			for i in xrange(0 + 0, self.n_mu[0]):
-
-				if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] > 0.30)\
-				and \
-				(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] > 0.15))\
-				or			\
-				self.l_tkIso20_mu[i] > 0.15\
-				or			\
-				self.l_d0sigma_mu[i] > 3.5:
+				if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == False:
 					continue
 
 				for j in xrange(i + 1, self.n_mu[0]):
-
-					if ((self.l_lepton_mu[j] != 2 and self.l_clIso20_mu[j] > 0.30)\
-					and \
-					(self.l_lepton_mu[j] == 2 and self.l_clIso20_mu[j] > 0.15))\
-					or			\
-					self.l_tkIso20_mu[j] > 0.15\
-					or			\
-					self.l_d0sigma_mu[j] > 3.5:
+					if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_mu[j], self.l_clIso20_mu[j], self.l_tkIso20_mu[j], self.l_d0sigma_mu[j]) == False:
 						continue
 
 					if (self.l_charge_mu[i] * self.l_charge_mu[j]) < 0 \
@@ -896,7 +866,6 @@ class TZLTree:
 
 				for i in xrange(0, self.n_ele[0]):
 					if self.l_tag_ele[i] == 1:
-
 						weight = evt_weight * self.weight3_ele[i]
 
 						NeTagZee += 1
@@ -923,20 +892,16 @@ class TZLTree:
 						# IsoCuts on Z ele  #
 						#####################
 
-						if Year == 2012 and self.l_clIso20_ele[i] < 0.20:
+						if utils.isLeptonPassCuts(2012, True, False, False, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 							NeTagZee_CaloIsoOk += 1
 							NeTagZee_CaloIsoOk_Weighted += weight
-						if self.l_tkIso20_ele[i] < 0.15:
+						if utils.isLeptonPassCuts(2012, False, True, False, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 							NeTagZee_TrkIsoOk += 1
 							NeTagZee_TrkIsoOk_Weighted += weight
-						if self.l_d0sigma_ele[i] < 6.5:
+						if utils.isLeptonPassCuts(2012, False, False, True, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 							NeTagZee_d0Ok += 1
 							NeTagZee_d0Ok_Weighted += weight
-						if Year == 2012 and self.l_clIso20_ele[i] < 0.20\
-						and			\
-						self.l_tkIso20_ele[i] < 0.15\
-						and			\
-						self.l_d0sigma_ele[i] < 6.5:
+						if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 							NeTagZee_AllOk += 1
 							NeTagZee_AllOk_Weighted += weight
 
@@ -989,27 +954,23 @@ class TZLTree:
 							# IsoCuts add ele   #
 							#####################
 
-							if Year == 2012 and self.l_clIso20_ele[i] < 0.20:
+							if utils.isLeptonPassCuts(2012, True, False, False, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZee_CaloIsoOk += 1
 								NeUntagZee_CaloIsoOk_Weighted += weight
 								heUntagZeeCaloIsoOk_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZeeCaloIsoOk_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
 
-							if self.l_tkIso20_ele[i] < 0.15:
+							if utils.isLeptonPassCuts(2012, False, True, False, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZee_TrkIsoOk += 1
 								NeUntagZee_TrkIsoOk_Weighted += weight
 								heUntagZeeTrkIsoOk_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZeeTrkIsoOk_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
-							if self.l_d0sigma_ele[i] < 6.5:
+							if utils.isLeptonPassCuts(2012, False, False, True, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZee_d0Ok += 1
 								NeUntagZee_d0Ok_Weighted += weight
 								heUntagZeed0Ok_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZeed0Ok_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
-							if Year == 2012 and self.l_clIso20_ele[i] < 0.20\
-							and			\
-							self.l_tkIso20_ele[i] < 0.15\
-							and			\
-							self.l_d0sigma_ele[i] < 6.5:
+							if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZee_AllOk += 1
 								NeUntagZee_AllOk_Weighted += weight
 								heUntagZeeAllOk_eta.Fill(self.l_eta_ele[i], weight)
@@ -1048,31 +1009,23 @@ class TZLTree:
 							# IsoCuts on mu add#
 							#####################
 
-							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
-							or \
-							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15)):
+							if utils.isLeptonPassCuts(2012, True, False, False, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZee_CaloIsoOk += 1
 								NuUntagZee_CaloIsoOk_Weighted += weight
 								huUntagZeeCaloIsoOk_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZeeCaloIsoOk_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
-							if self.l_tkIso20_mu[i] < 0.15:
+							if utils.isLeptonPassCuts(2012, False, True, False, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZee_TrkIsoOk += 1
 								NuUntagZee_TrkIsoOk_Weighted += weight
 								huUntagZeeTrkIsoOk_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZeeTrkIsoOk_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
-							if self.l_d0sigma_mu[i] < 3.5:
+							if utils.isLeptonPassCuts(2012, False, False, True, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZee_d0Ok += 1
 								NuUntagZee_d0Ok_Weighted += weight
 								huUntagZeed0Ok_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZeed0Ok_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
 
-							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
-							or \
-							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15))\
-							and			\
-							self.l_tkIso20_mu[i] < 0.15\
-							and			\
-							self.l_d0sigma_mu[i] < 3.5:
+							if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZee_AllOk += 1
 								NuUntagZee_AllOk_Weighted += weight
 								huUntagZeeAllOk_eta.Fill(self.l_eta_mu[i], weight)
@@ -1158,25 +1111,17 @@ class TZLTree:
 						# IsoCuts on Z mu   #
 						#####################
 
-						if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
-						or\
-						(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15)):
+						if utils.isLeptonPassCuts(2012, True, False, False, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 							NuTagZuu_CaloIsoOk += 1
 							NuTagZuu_CaloIsoOk_Weighted += weight
-						if self.l_tkIso20_mu[i] < 0.15:
+						if utils.isLeptonPassCuts(2012, False, True, False, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 							NuTagZuu_TrkIsoOk += 1
 							NuTagZuu_TrkIsoOk_Weighted += weight
-						if self.l_d0sigma_mu[i] < 3.5:
+						if utils.isLeptonPassCuts(2012, False, False, True, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 							NuTagZuu_d0Ok += 1
 							NuTagZuu_d0Ok_Weighted += weight
 
-						if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
-						or\
-						(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15))\
-						and			\
-						self.l_tkIso20_mu[i] < 0.15\
-						and			\
-						self.l_d0sigma_mu[i] < 3.5:
+						if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 							NuTagZuu_AllOk += 1
 							NuTagZuu_AllOk_Weighted += weight
 
@@ -1225,26 +1170,22 @@ class TZLTree:
 							# IsoCuts Add ele   #
 							#####################
 
-							if self.l_clIso20_ele[i] < 0.20:
+							if utils.isLeptonPassCuts(2012, True, False, False, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZuu_CaloIsoOk += 1
 								NeUntagZuu_CaloIsoOk_Weighted += weight
 								heUntagZuuCaloIsoOk_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZuuCaloIsoOk_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
-							if self.l_tkIso20_ele[i] < 0.15:
+							if utils.isLeptonPassCuts(2012, False, True, False, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZuu_TrkIsoOk += 1
 								NeUntagZuu_TrkIsoOk_Weighted += weight
 								heUntagZuuTrkIsoOk_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZuuTrkIsoOk_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
-							if self.l_d0sigma_ele[i] < 6.5:
+							if utils.isLeptonPassCuts(2012, False, False, True, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZuu_d0Ok += 1
 								NeUntagZuu_d0Ok_Weighted += weight
 								heUntagZuud0Ok_eta.Fill(self.l_eta_ele[i], weight)
 								heUntagZuud0Ok_pt.Fill(self.l_pt_ele[i] / 1000.0, weight)
-							if self.l_clIso20_ele[i] < 0.20\
-							and			\
-							self.l_tkIso20_ele[i] < 0.15\
-							and			\
-							self.l_d0sigma_ele[i] < 6.5:
+							if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_ele[i], self.l_clIso20_ele[i], self.l_tkIso20_ele[i], self.l_d0sigma_ele[i]) == True:
 								NeUntagZuu_AllOk += 1
 								NeUntagZuu_AllOk_Weighted += weight
 								heUntagZuuAllOk_eta.Fill(self.l_eta_ele[i], weight)
@@ -1283,31 +1224,23 @@ class TZLTree:
 							# IsoCuts Add mu    #
 							#####################
 
-							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
-							or\
-							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15)):
+							if utils.isLeptonPassCuts(2012, True, False, False, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZuu_CaloIsoOk += 1
 								NuUntagZuu_CaloIsoOk_Weighted += weight
 								huUntagZuuCaloIsoOk_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZuuCaloIsoOk_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
-							if self.l_tkIso20_mu[i] < 0.15:
+							if utils.isLeptonPassCuts(2012, False, True, False, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZuu_TrkIsoOk += 1
 								NuUntagZuu_TrkIsoOk_Weighted += weight
 								huUntagZuuTrkIsoOk_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZuuTrkIsoOk_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
-							if self.l_d0sigma_mu[i] < 3.5:
+							if utils.isLeptonPassCuts(2012, False, False, True, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZuu_d0Ok += 1
 								NuUntagZuu_d0Ok_Weighted += weight
 								huUntagZuud0Ok_eta.Fill(self.l_eta_mu[i], weight)
 								huUntagZuud0Ok_pt.Fill(self.l_pt_mu[i] / 1000.0, weight)
 
-							if ((self.l_lepton_mu[i] != 2 and self.l_clIso20_mu[i] < 0.30)\
-							or\
-							(self.l_lepton_mu[i] == 2 and self.l_clIso20_mu[i] < 0.15))\
-							and			\
-							self.l_tkIso20_mu[i] < 0.15\
-							and			\
-							self.l_d0sigma_mu[i] < 3.5:
+							if utils.isLeptonPassCuts(2012, True, True, True, self.l_lepton_mu[i], self.l_clIso20_mu[i], self.l_tkIso20_mu[i], self.l_d0sigma_mu[i]) == True:
 								NuUntagZuu_AllOk += 1
 								NuUntagZuu_AllOk_Weighted += weight
 								huUntagZuuAllOk_eta.Fill(self.l_eta_mu[i], weight)
@@ -1399,6 +1332,7 @@ class TZLTree:
 
 		#f = ROOT.TFile('output/%d/Z_MC_%d.root' %(Year, mc_RunNumber), 'RECREATE')
 
+		#f = ROOT.TFile('output/test.root', 'RECREATE')
 		f.cd()
 
 		tree = ROOT.TTree('result', 'result')
